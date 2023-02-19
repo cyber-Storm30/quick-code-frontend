@@ -1,0 +1,23 @@
+.editorTextArea {
+}
+
+.submitButton {
+  padding-left: 45px;
+  padding-right: 45px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: #0e86d4;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #055c9d;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+}

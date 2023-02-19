@@ -1,0 +1,60 @@
+.itemWrapper {
+  width: 1000px;
+  border: 1px solid gray;
+  border-bottom: none;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.itemWrapper.last {
+  border-bottom: 1px solid gray;
+}
+
+.slNo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid gray;
+  width: 50px;
+  height: 100%;
+}
+
+.problemTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid gray;
+  width: 60%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.difficulty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid gray;
+  width: 100px;
+  height: 100%;
+}
+
+.difficulty.easy {
+  color: lightseagreen;
+}
+
+.difficulty.medium {
+  color: orange;
+}
+
+.difficulty.hard {
+  color: crimson;
+}
+
+.practiced {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 100%;
+}
