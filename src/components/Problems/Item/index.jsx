@@ -2,7 +2,15 @@ import React from "react";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
 
-const Item = ({ index, id, title, difficulty, practiced, lastItem }) => {
+const Item = ({
+  index,
+  id,
+  title,
+  difficulty,
+  practiced,
+  lastItem,
+  attemptedBy,
+}) => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/editor/${id}`);
