@@ -9,6 +9,7 @@ import TextEditor from "./TextEditor";
 import Loader from "./Loader";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Instruction from "./Instructions";
+import { CircularProgress } from "@mui/material";
 
 const Editor = () => {
   const [question, setQuestion] = useState();
@@ -27,13 +28,16 @@ const Editor = () => {
 
   const getQuestion = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `${baseUrl}/question/get/${questionId.id}`
       );
       console.log(data);
       setQuestion(data);
+      setLoading(false);
       setWrittenCode(data.functionPrototype);
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
@@ -58,65 +62,73 @@ const Editor = () => {
 
   return (
     <div className="editor">
-      <Instruction
-        open={instructionModalOpen}
-        setOpen={setInstructionModalOpen}
-      />
-      <Loader open={loading} />
-      <div className="leftContainer">
-        <div className="editorTab">
-          <div
-            className={toggle === 0 ? "tabButton active" : "tabButton"}
-            onClick={() => {
-              setToggle(0);
-            }}
-          >
-            Description
-          </div>
-          <div
-            className={toggle === 1 ? "tabButton active" : "tabButton"}
-            onClick={() => {
-              setToggle(1);
-            }}
-          >
-            Submissions
-          </div>
+      {loading ? (
+        <div style={{ position: "absolute", top: "43%", left: "50%" }}>
+          <CircularProgress />
         </div>
-        {renderPage()}
-      </div>
-      <div className="rightContainer">
-        <div className="tab">
-          <button
-            className="tabRightButton"
-            onClick={() => {
-              setInstructionModalOpen(true);
-            }}
-          >
-            Need Help? Click here
-          </button>
-          <button
-            className="tabRightButton"
-            onClick={() => {
-              setWrittenCode(question?.functionPrototype);
-            }}
-          >
-            <ReplayIcon />
-            <p>Reset Code</p>
-          </button>
-        </div>
-        <TextEditor
-          question={question}
-          codeResult={codeResult}
-          setCodeResult={setCodeResult}
-          setToggle={setToggle}
-          counter={counter}
-          setCounter={setCounter}
-          loading={loading}
-          setLoading={setLoading}
-          writtenCode={writtenCode}
-          setWrittenCode={setWrittenCode}
-        />
-      </div>
+      ) : (
+        <>
+          <Instruction
+            open={instructionModalOpen}
+            setOpen={setInstructionModalOpen}
+          />
+          <Loader open={loading} />
+          <div className="leftContainer">
+            <div className="editorTab">
+              <div
+                className={toggle === 0 ? "tabButton active" : "tabButton"}
+                onClick={() => {
+                  setToggle(0);
+                }}
+              >
+                Description
+              </div>
+              <div
+                className={toggle === 1 ? "tabButton active" : "tabButton"}
+                onClick={() => {
+                  setToggle(1);
+                }}
+              >
+                Submissions
+              </div>
+            </div>
+            {renderPage()}
+          </div>
+          <div className="rightContainer">
+            <div className="tab">
+              <button
+                className="tabRightButton"
+                onClick={() => {
+                  setInstructionModalOpen(true);
+                }}
+              >
+                Need Help? Click here
+              </button>
+              <button
+                className="tabRightButton"
+                onClick={() => {
+                  setWrittenCode(question?.functionPrototype);
+                }}
+              >
+                <ReplayIcon />
+                <p>Reset Code</p>
+              </button>
+            </div>
+            <TextEditor
+              question={question}
+              codeResult={codeResult}
+              setCodeResult={setCodeResult}
+              setToggle={setToggle}
+              counter={counter}
+              setCounter={setCounter}
+              loading={loading}
+              setLoading={setLoading}
+              writtenCode={writtenCode}
+              setWrittenCode={setWrittenCode}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };
