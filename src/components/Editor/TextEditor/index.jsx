@@ -6,6 +6,7 @@ import { darcula } from "@uiw/codemirror-theme-darcula";
 import "@uiw/codemirror-theme-sublime";
 import axios from "axios";
 import { baseUrl } from "../../../services/api";
+import { useSelector } from "react-redux";
 
 const TextEditor = ({
   question,
@@ -20,6 +21,7 @@ const TextEditor = ({
   setWrittenCode,
 }) => {
   const [isSubmit, setIsSubmit] = useState(false);
+  const user = useSelector((state) => state.auth.user);
 
   const onChange = React.useCallback((value) => {
     setWrittenCode(value);
@@ -33,10 +35,10 @@ const TextEditor = ({
           .post(`${baseUrl}/question/submit`, {
             questionId: question._id,
             code: writtenCode,
-            userId: "63f20b0b887bdea9a39d4b2e",
+            userId: `${user._id}`,
           })
           .then((res) => {
-            console.log(res.data);
+            console.log(res);
             setCodeResult(res);
             setToggle(1);
             setLoading(false);

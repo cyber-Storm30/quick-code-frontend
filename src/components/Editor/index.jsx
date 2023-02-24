@@ -17,6 +17,7 @@ const Editor = () => {
   const [codeResult, setCodeResult] = useState();
   const [counter, setCounter] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
   const [instructionModalOpen, setInstructionModalOpen] = useState();
   const questionId = useParams();
 
@@ -28,16 +29,16 @@ const Editor = () => {
 
   const getQuestion = async () => {
     try {
-      setLoading(true);
+      setPageLoading(true);
       const { data } = await axios.get(
         `${baseUrl}/question/get/${questionId.id}`
       );
       console.log(data);
       setQuestion(data);
-      setLoading(false);
+      setPageLoading(false);
       setWrittenCode(data.functionPrototype);
     } catch (err) {
-      setLoading(false);
+      setPageLoading(false);
       console.log(err);
     }
   };
@@ -62,7 +63,7 @@ const Editor = () => {
 
   return (
     <div className="editor">
-      {loading ? (
+      {pageLoading ? (
         <div style={{ position: "absolute", top: "43%", left: "50%" }}>
           <CircularProgress />
         </div>
