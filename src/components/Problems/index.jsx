@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Item from "./Item";
 import "./styles.css";
+import { useSelector } from "react-redux";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 const Problems = () => {
   const [questions, setQuestions] = useState([]);
+  const user = useSelector((state) => state.auth.user);
 
   const navigate = useNavigate();
 
@@ -39,6 +42,11 @@ const Problems = () => {
           title={data.title}
           difficulty={data.tags[0]}
           lastItem={idx + 1 === questions.length}
+          practiced={
+            data.attemptedBy.includes(user._id) && (
+              <DoneAllIcon sx={{ color: "#0E86D4" }} />
+            )
+          }
         />
       ))}
     </div>

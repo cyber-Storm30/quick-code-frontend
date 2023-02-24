@@ -4,21 +4,26 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import axios from "axios";
 import { baseUrl } from "../../../services/api";
+import { useSelector } from "react-redux";
 import moment from "moment";
 
 const Submissions = ({ counter, question, codeResult, loading }) => {
   const [submissions, setSubmissions] = useState();
+  const user = useSelector((state) => state.auth.user);
+
+  console.log("User", user);
+  console.log("Question", question);
 
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(
-        `${baseUrl}/user/get/all/submissions/63f20b0b887bdea9a39d4b2e`
+        `${baseUrl}/user/get/all/submissions/${user._id}/${question._id}`
       );
       console.log(res.data);
       setSubmissions(res?.data);
     };
     getData();
-  }, []);
+  }, [counter]);
 
   return (
     <div className="submissionsWrapper">
@@ -38,7 +43,7 @@ const Submissions = ({ counter, question, codeResult, loading }) => {
         <p className="submissionText">All Submissions</p>
       </div>
       <div>
-        {submissions?.reverse()?.map((data, idx) => (
+        {submissions?.map((data, idx) => (
           <div className="submissionUpperWrapper" key={idx}>
             {data.submission !== "Wrong Answer" ? (
               <div className="resultsWrapper">

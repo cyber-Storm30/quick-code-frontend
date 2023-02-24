@@ -1,0 +1,43 @@
+.userWrapper {
+  /* width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: red; */
+}
+.userContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #68bbe3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.userImage {
+  width: 80%;
+  height: 80%;
+}
+
+.dropdown {
+  background-color: #b75cff;
+  width: 90px;
+  height: 30px;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.dropdown:hover {
+  background-color: #420075;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+}

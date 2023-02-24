@@ -7,6 +7,8 @@ import Submissions from "./Submissions";
 import "./styles.css";
 import TextEditor from "./TextEditor";
 import Loader from "./Loader";
+import ReplayIcon from "@mui/icons-material/Replay";
+import Instruction from "./Instructions";
 
 const Editor = () => {
   const [question, setQuestion] = useState();
@@ -14,7 +16,10 @@ const Editor = () => {
   const [codeResult, setCodeResult] = useState();
   const [counter, setCounter] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [instructionModalOpen, setInstructionModalOpen] = useState();
   const questionId = useParams();
+
+  const [writtenCode, setWrittenCode] = useState();
 
   useEffect(() => {
     getQuestion();
@@ -25,7 +30,9 @@ const Editor = () => {
       const { data } = await axios.get(
         `${baseUrl}/question/get/${questionId.id}`
       );
+      console.log(data);
       setQuestion(data);
+      setWrittenCode(data.functionPrototype);
     } catch (err) {
       console.log(err);
     }
@@ -51,6 +58,10 @@ const Editor = () => {
 
   return (
     <div className="editor">
+      <Instruction
+        open={instructionModalOpen}
+        setOpen={setInstructionModalOpen}
+      />
       <Loader open={loading} />
       <div className="leftContainer">
         <div className="editorTab">
@@ -75,8 +86,23 @@ const Editor = () => {
       </div>
       <div className="rightContainer">
         <div className="tab">
-          <div className="tabRightButton">Instructions</div>
-          <div className="tabRightButton"> Reset</div>
+          <button
+            className="tabRightButton"
+            onClick={() => {
+              setInstructionModalOpen(true);
+            }}
+          >
+            Need Help? Click here
+          </button>
+          <button
+            className="tabRightButton"
+            onClick={() => {
+              setWrittenCode(question?.functionPrototype);
+            }}
+          >
+            <ReplayIcon />
+            <p>Reset Code</p>
+          </button>
         </div>
         <TextEditor
           question={question}
@@ -87,6 +113,8 @@ const Editor = () => {
           setCounter={setCounter}
           loading={loading}
           setLoading={setLoading}
+          writtenCode={writtenCode}
+          setWrittenCode={setWrittenCode}
         />
       </div>
     </div>

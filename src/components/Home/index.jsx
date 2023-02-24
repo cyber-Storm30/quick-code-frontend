@@ -39,7 +39,7 @@ const Home = () => {
         </button>
       </div>
       <div className="rightWrapper">
-        <div className="animation" ref={container}></div>
+        <div ref={container}></div>
       </div>
     </div>
   );

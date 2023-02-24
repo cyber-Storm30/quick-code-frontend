@@ -15,16 +15,10 @@ const TextEditor = ({
   setCounter,
   loading,
   setLoading,
+  code,
+  writtenCode,
+  setWrittenCode,
 }) => {
-  //   const code = `/**\n* Do not change this function body\n* Do your changes within the function\n*/ \n\n/**
-  //   * Do not change this function body
-  //   * Do your changes within the function
-  //   */
-  //   `
-  const code = `return function ${question?.functionPrototype}{
-    // write your code here
-  }`;
-  const [writtenCode, setWrittenCode] = useState(code);
   const [isSubmit, setIsSubmit] = useState(false);
 
   const onChange = React.useCallback((value) => {
@@ -45,11 +39,11 @@ const TextEditor = ({
             console.log(res.data);
             setCodeResult(res);
             setToggle(1);
-            // setCounter((prevCount) => !prevCount);
             setLoading(false);
             setIsSubmit(false);
           });
       }, 2000);
+      setCounter((prevCount) => !prevCount);
       return () => clearTimeout(submit);
     }
   }, [isSubmit]);
@@ -78,7 +72,7 @@ const TextEditor = ({
       <CodeMirror
         height="500px"
         theme={darcula}
-        value={code}
+        value={writtenCode}
         extensions={[javascript({ jsx: true })]}
         onChange={onChange}
       />

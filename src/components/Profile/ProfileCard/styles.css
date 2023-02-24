@@ -1,0 +1,61 @@
+.cardWrapper {
+  width: 60%;
+  border-radius: 10px;
+  padding: 20px;
+  -webkit-box-shadow: -6px -3px 67px -17px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -6px -3px 67px -17px rgba(0, 0, 0, 0.75);
+  box-shadow: -6px -3px 67px -17px rgba(0, 0, 0, 0.75);
+  position: relative;
+}
+
+.logoutWrapper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.logoutText {
+  color: crimson;
+}
+
+.cardLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 35%;
+}
+
+.cardUserImageWrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #68bbe3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cardUserImage {
+  width: 80px;
+  height: 80px;
+}
+
+.cardUserDetails {
+  padding-top: 15px;
+}
+
+.cardUserName {
+  font-size: 18px;
+}
+
+.cardSecondatyText {
+  font-size: 14px;
+}

@@ -3,6 +3,8 @@ import "./styles.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import Login from "../../components/Home/Login";
 import Signup from "../../components/Home/Signup";
+import User from "../User";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -10,6 +12,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
 
+  const user = useSelector((state) => state.auth.user);
   return (
     <div className="navbar">
       <Login open={open} setOpen={setOpen} />
@@ -18,7 +21,11 @@ const Navbar = () => {
         <p
           className="title"
           onClick={() => {
-            navigate("/");
+            if (user) {
+              navigate("/problems");
+            } else {
+              navigate("/");
+            }
           }}
         >
           QuickCode
@@ -41,7 +48,7 @@ const Navbar = () => {
         )}
       </div>
       <div className="splitWrapper">
-        {pathname === "/" && (
+        {pathname === "/" ? (
           <div
             style={{
               display: "flex",
@@ -67,6 +74,8 @@ const Navbar = () => {
               Login
             </button>
           </div>
+        ) : (
+          <User />
         )}
       </div>
     </div>
